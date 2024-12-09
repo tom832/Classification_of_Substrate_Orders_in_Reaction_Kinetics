@@ -161,7 +161,7 @@ if __name__ == '__main__':
         plt.rcParams['font.family'] = 'Arial'
         plt.figure(figsize=(7, 7))
         plt.rcParams.update({'font.size': 20})
-        cm = confusion_matrix(y_test, y_pred)
+        cm = confusion_matrix(y_test, y_pred, labels=class_list)
         sns.heatmap(cm, annot=True, fmt='g', cmap=plt.cm.Blues, cbar=False)
         tick_marks = np.arange(len(class_list)) + 0.5
         if class_num == 6:
