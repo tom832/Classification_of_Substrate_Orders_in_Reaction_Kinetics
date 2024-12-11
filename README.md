@@ -10,9 +10,10 @@ This repository contains the source data and codes for paper "Mechanistic Studie
 - [Overview](#overview)
 - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
-
 - [Training and Evaluation on Test data](#training-and-evaluation-on-test-data)
-
+- [Analysis on the results](#analysis-on-the-results)
+- [Inference on experimental data](#inference-on-experimental-data)
+- [Citation](#citation)
 
 
 ## Installation
@@ -72,7 +73,20 @@ options:
   --evaluate_on_test_data  Evaluate on test data. Default=False
 ```
 
-- Example 1: train 5-class classification model with tsfresh and raw features using 1 GPU(cuda) and all CPU for 3 hours on best quality without verbose log, and evaluate on test data finally.
+- Example 1: train 6-class classification model with raw features using 4 CPUs and no GPU for 0.1 hours on medium quality with verbose log to quickly check the training process, and do not evaluate on test data finally.
+```
+python ag_train.py \
+    --sp_mode s \
+    --class_num 6 \
+    --feat raw \
+    --ag_train_quality medium_quality \
+    --hours 0.1 \
+    --num_cpus 4 \
+    --num_gpus 0 \
+    --verbose 2
+```
+
+- Example 2: train 5-class classification model with tsfresh and raw features using 1 GPU(cuda) and all CPU for 3 hours on best quality without verbose log, and evaluate on test data finally.
 ```
 python ag_train.py \
     --sp_mode s \
@@ -85,18 +99,7 @@ python ag_train.py \
     --verbose 0 \
     --evaluate_on_test_data
 ```
-- Example 2: train 6-class classification model with raw features using 4 CPUs and no GPU for 0.1 hours on medium quality with verbose log to quickly check the training process, and do not evaluate on test data finally.
-```
-python ag_train.py \
-    --sp_mode s \
-    --class_num 6 \
-    --feat raw \
-    --ag_train_quality medium_quality \
-    --hours 0.1 \
-    --num_cpus 4 \
-    --num_gpus 0 \
-    --verbose 2
-```
+
 
 ## Analysis on the results
 
