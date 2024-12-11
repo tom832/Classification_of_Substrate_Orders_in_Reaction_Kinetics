@@ -12,13 +12,13 @@ import argparse
 if __name__ == '__main__':
 
     # load arguments
-    parser = argparse.ArgumentParser(description="Process arguments for classification of substrate orders in reaction kinetics.")
+    parser = argparse.ArgumentParser(description="Training arguments for classification of substrate orders in reaction kinetics.")
     parser.add_argument('--sp_mode', type=str, default='s', help='Which concentration profile(s) to use: s, p or sp. s: substrate, p: product, sp: substrate and product. Default=s')
     parser.add_argument('--class_num', type=int, default=5, help='Number of classes: 5 or 6. Default=5')
     parser.add_argument('--feat', type=str, default='tsfresh_raw', help='Feature type: tsfresh_raw, tsfresh or raw. Default=tsfresh_raw')
     parser.add_argument('--ag_train_quality', type=str, default='best_quality', help='Autogluon train quality: best_quality, high_quality, good_quality or medium_quality. Default=best_quality')
     parser.add_argument('--hours', type=float, default=3.0, help='Training time limit in hours. Default=3.0')
-    parser.add_argument('--num_cpus', type=int, default=4, help='Number of CPUs. Default=4')
+    parser.add_argument('--num_cpus', type=int, default=0, help='Number of CPUs, 0 means using all CPUs. Default=0')
     parser.add_argument('--num_gpus', type=int, default=1, help='Number of GPUs: 0 or 1. Default=1')
     parser.add_argument('--random_seed', type=int, default=29, help='Random seed. Default=29')
     parser.add_argument('--verbose', type=int, default=2, help='Verbosity level: 0 to 4. Default=2')
@@ -117,7 +117,7 @@ if __name__ == '__main__':
         presets=ag_train_quality,
         time_limit=60*60*hours,
         num_gpus=args.num_gpus,
-        num_cpus=args.num_cpus,
+        num_cpus=args.num_cpus if args.num_cpus > 0 else 'auto',
     )
 
     # evaluate model on test data
