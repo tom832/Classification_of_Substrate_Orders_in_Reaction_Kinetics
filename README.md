@@ -44,7 +44,7 @@ This repository contains the source data and codes for paper "Mechanistic Studie
     │   │   └── test.csv
     │   │   └── test_tsfresh_feat.csv
     │   ├── ode_raw_data (directory for raw data of ODE)
-    └── model
+    └── AutogluonModels
         └── 5_class
         │   └── tsfresh_raw_feat__s__best_quality_3h (best model used in research)
         └── 6_class
@@ -53,5 +53,77 @@ This repository contains the source data and codes for paper "Mechanistic Studie
     ```
 
 ## Training and Evaluation on Test data
-- `python ag_train.py` to train the model
-- `python ag_train.py -h` to see the help message about arguments
+- `python ag_train.py`, parameters are as follows:
+```
+>> python ag_train.py -h
+
+Training arguments for classification of substrate orders in reaction kinetics.
+
+options:
+  -h, --help               show this help message and exit
+  --sp_mode                Which concentration profile(s) to use: s, p or sp. s: substrate, p: product, sp: substrate and product. Default=s
+  --class_num              Number of classes: 5 or 6. Default=5
+  --feat                   Feature type: tsfresh_raw, tsfresh or raw. Default=tsfresh_raw
+  --ag_train_quality       Autogluon train quality: best_quality, high_quality, good_quality or medium_quality. Default=best_quality
+  --hours                  Training time limit in hours. Default=3.0
+  --num_cpus               Number of CPUs, 0 means using all CPUs. Default=0
+  --num_gpus               Number of GPUs: 0 or 1. Default=1
+  --verbose                Verbosity level: 0 to 4. Default=2
+  --evaluate_on_test_data  Evaluate on test data. Default=False
+```
+
+- Example 1: train 5-class classification model with tsfresh and raw features using 1 GPU(cuda) and all CPU for 3 hours on best quality without verbose log, and evaluate on test data finally.
+```
+python ag_train.py \
+    --sp_mode s \
+    --class_num 5 \
+    --feat tsfresh_raw \
+    --ag_train_quality best_quality \
+    --hours 3.0 \
+    --num_cpus 0 \
+    --num_gpus 1 \
+    --verbose 0 \
+    --evaluate_on_test_data
+```
+- Example 2: train 6-class classification model with raw features using 4 CPUs and no GPU for 0.1 hours on medium quality with verbose log to quickly check the training process, and do not evaluate on test data finally.
+```
+python ag_train.py \
+    --sp_mode s \
+    --class_num 6 \
+    --feat raw \
+    --ag_train_quality medium_quality \
+    --hours 0.1 \
+    --num_cpus 4 \
+    --num_gpus 0 \
+    --verbose 2
+```
+
+## Analysis on the results
+
+Jupyter notebook `ag_result_analysis.ipynb` is provided for analysis on the results of the trained models.
+
+Including the following for 5-class and 6-class separately:
+1. Autogluon Model leaderboard on validation data
+2. Evaluation and performance on test data
+3. Confuxion matrix heatmap of prediction on test data
+4. Chord diagram of prediction on test data
+5. Probability distribution of prediction on test data (Figure 4e in the paper)
+
+## Inference on experimental data
+
+Jupyter notebook `ag_experiments.ipynb` and wet-lab data `./experimental_data/data.csv` is provided for inference on experimental data.
+
+1. Prepare the experimental data
+    - Read raw data
+    - Normalize the time and concentration
+    - Fit the concentration-time curve and obtain the 30 data points with equal time intervals to align with the model input
+    - Extract the tsfresh features and concatenate with the raw features as the tabular input for Autogluon model
+2. Load the trained model
+3. Inference on the experimental data
+4. Visualization of the prediction results (Figure 5c and 6 in the paper)
+
+You can use your own experimental data with a column of time and a column of concentration like the provided `./experimental_data/data.csv` to do the inference.
+
+## Citation
+ 
+ To be updated.
