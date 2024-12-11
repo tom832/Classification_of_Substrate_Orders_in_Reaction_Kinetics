@@ -61,8 +61,8 @@ if __name__ == '__main__':
         if torch.cuda.is_available():
             print(f'Using GPU: {torch.cuda.get_device_name(0)}')
         else:
-            print('Error: No GPU available. Please set --num_gpus 0')
-            sys.exit(1)
+            args.num_gpus = 0
+            print('GPU not available, using CPU instead.')
 
     print(f'Arguments: mode={sp_mode}, class_num={class_num}, feat={feat}, ag_train_quality={ag_train_quality}, hours={hours}, evaluate_on_test_data={evaluate_on_test_data}')
 
