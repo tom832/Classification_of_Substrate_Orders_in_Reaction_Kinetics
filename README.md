@@ -10,6 +10,7 @@ This repository contains the source data and codes for paper "Mechanistic Studie
 - [Overview](#overview)
 - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
+- [Generate ODE data and prepare the dataset](#generate-ode-data-and-prepare-the-dataset)
 - [Training and Evaluation on Test data](#training-and-evaluation-on-test-data)
 - [Analysis on the results](#analysis-on-the-results)
 - [Inference on experimental data](#inference-on-experimental-data)
@@ -22,7 +23,7 @@ This repository contains the source data and codes for paper "Mechanistic Studie
     - `git clone https://github.com/tom832/Classification_of_Substrate_Orders_in_Reaction_Kinetics.git`
     - `cd Classification_of_Substrate_Orders_in_Reaction_Kinetics`
 
-2. Create conda environment from environment.yml （Recommended operating on a Linux machine）
+2. Create conda environment from environment.yml (Recommended operating on a Linux machine)
     - `conda create -f environment.yml`
     - `conda activate cosork` stands for **C**lassification **O**f **S**ubstrate **O**rders in **R**eaction **K**inetics
 
@@ -32,26 +33,47 @@ This repository contains the source data and codes for paper "Mechanistic Studie
     ```
     .
     ├── data
-    │   ├── 5_class
-    │   │   ├── raw (directory for raw data of each class)
-    │   │   └── train_val.csv
-    │   │   └── train_val_tsfresh_feat.csv
-    │   │   └── test.csv
-    │   │   └── test_tsfresh_feat.csv
-    │   ├── 6_class
-    │   │   ├── raw (directory for raw data of each class)
-    │   │   └── train_val.csv
-    │   │   └── train_val_tsfresh_feat.csv
-    │   │   └── test.csv
-    │   │   └── test_tsfresh_feat.csv
-    │   ├── ode_raw_data (directory for raw data of ODE)
+    │   ├── 5_class
+    │   │   ├── raw (directory for raw data of each class)
+    │   │   ├── train_val.csv
+    │   │   ├── train_val_tsfresh_feat.csv
+    │   │   ├── test.csv
+    │   │   └── test_tsfresh_feat.csv
+    │   ├── 6_class
+    │   │   ├── raw (directory for raw data of each class)
+    │   │   ├── train_val.csv
+    │   │   ├── train_val_tsfresh_feat.csv
+    │   │   ├── test.csv
+    │   │   └── test_tsfresh_feat.csv
+    │   └── ode_raw_data (directory for raw data of ODE)
     └── AutogluonModels
-        └── 5_class
-        │   └── tsfresh_raw_feat__s__best_quality_3h (best model used in research)
-        └── 6_class
-            └── tsfresh_raw_feat__s__best_quality_3h (best model used in research)
+        ├── 5_class
+        │   └── tsfresh_raw_feat__s__best_quality_3h (best model used in research)
+        └── 6_class
+            └── tsfresh_raw_feat__s__best_quality_3h (best model used in research)
 
     ```
+
+## Generate ODE data and prepare the dataset
+
+1. use python scripts under `./solve_ode_scripts` to generate ODE data (json files) in `./data/ode_raw_data` which has been provided in the above downloading step. Example bash script is provided in `./solve_ode_scripts/solve_ivp_example.sh`
+    ```
+    .
+    └── solve_ode_scripts
+        ├── solve_ivp_example.sh (example script to generate 15-class ODE data)
+        ├── solve_ivp_double_inside.py
+        ├── solve_ivp_double_outside.py
+        ├── solve_ivp_double.py
+        ├── solve_ivp_single.py
+        └── solve_ivp_single_outside.py
+    ```
+
+2. use notebook `./prepare_data.ipynb` to prepare the tabular data for training. The following steps are included:
+    - Read the json raw data, transform 15 detailed classes into 5 or 6 general classes, and collect them in `./data/x_class/raw/xxx__all.csv` files
+    - Stratifiedly and randomly choose 10k data for each general class as `./data/x_class/raw/xxx__10k.csv` files
+    - Stratifiedly and randomly split 10% data as test data `./data/x_class/test.csv` and the rest as train and validation data `./data/x_class/train_val.csv`
+    - Extract the tsfresh features as `./data/x_class/train_val_tsfresh_feat.csv` and `./data/x_class/test_tsfresh_feat.csv` files
+
 
 ## Training and Evaluation on Test data
 - `python ag_train.py`, parameters are as follows:
