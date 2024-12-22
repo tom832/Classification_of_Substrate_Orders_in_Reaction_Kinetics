@@ -14,6 +14,7 @@ This repository contains the source data and codes for paper "Mechanistic Studie
 - [Training and Evaluation on Test data](#training-and-evaluation-on-test-data)
 - [Analysis on the results](#analysis-on-the-results)
 - [Inference on experimental data](#inference-on-experimental-data)
+- [Benchmark for time-sequence deep learning models](#benchmark-for-time-sequence-deep-learning-models)
 - [Citation](#citation)
 
 
@@ -56,7 +57,7 @@ This repository contains the source data and codes for paper "Mechanistic Studie
 
 ## Generate ODE data and prepare the dataset
 
-1. use python scripts under `./solve_ode_scripts` to generate ODE data (json files) in `./data/ode_raw_data` which has been provided in the above downloading step. Example bash script is provided in `./solve_ode_scripts/solve_ivp_example.sh`
+1. use python scripts under [`./solve_ode_scripts`](./solve_ode_scripts/) to generate ODE data (json files) in [`./data/ode_raw_data`](./data/ode_raw_data/) which has been provided in the above downloading step. Example bash script is provided in [`./solve_ode_scripts/solve_ivp_example.sh`](./solve_ode_scripts/solve_ivp_example.sh).
     ```
     .
     └── solve_ode_scripts
@@ -68,7 +69,7 @@ This repository contains the source data and codes for paper "Mechanistic Studie
         └── solve_ivp_single_outside.py
     ```
 
-2. use notebook `./prepare_data.ipynb` to prepare the tabular data for training. The following steps are included:
+2. use notebook [`./prepare_data.ipynb`](./prepare_data.ipynb) to prepare the tabular data for training. The following steps are included:
     - Read the json raw data, transform 15 detailed classes into 5 or 6 general classes, and collect them in `./data/x_class/raw/xxx__all.csv` files
     - Stratifiedly and randomly choose 10k data for each general class as `./data/x_class/raw/xxx__10k.csv` files
     - Stratifiedly and randomly split 10% data as test data `./data/x_class/test.csv` and the rest as train and validation data `./data/x_class/train_val.csv`
@@ -125,7 +126,7 @@ python ag_train.py \
 
 ## Analysis on the results
 
-Jupyter notebook `ag_result_analysis.ipynb` is provided for analysis on the results of the trained models.
+Jupyter notebook [`ag_result_analysis.ipynb`](./ag_result_analysis.ipynb) is provided for analysis on the results of the trained models.
 
 Including the following for 5-class and 6-class separately:
 1. Autogluon Model leaderboard on validation data
@@ -133,10 +134,11 @@ Including the following for 5-class and 6-class separately:
 3. Confuxion matrix heatmap of prediction on test data
 4. Chord diagram of prediction on test data
 5. Probability distribution of prediction on test data (Figure 4e in the paper)
+6. Benchmark for the data size 
 
 ## Inference on experimental data
 
-Jupyter notebook `ag_experiments.ipynb` and wet-lab data `./experimental_data/data.csv` is provided for inference on experimental data.
+Jupyter notebook [`ag_experiments.ipynb`](./ag_experiments.ipynb) and wet-lab data [`./experimental_data/data.csv`](./experimental_data/data.csv) is provided for inference on experimental data.
 
 1. Prepare the experimental data
     - Read raw data
@@ -147,7 +149,13 @@ Jupyter notebook `ag_experiments.ipynb` and wet-lab data `./experimental_data/da
 3. Inference on the experimental data
 4. Visualization of the prediction results (Figure 5c and 6 in the paper)
 
-You can use your own experimental data with a column of time and a column of concentration like the provided `./experimental_data/data.csv` to do the inference.
+You can use your own experimental data with a column of time and a column of concentration like the provided [`./experimental_data/data.csv`](./experimental_data/data.csv) to do the inference.
+
+## Benchmark for time-sequence deep learning models
+
+Jupyter notebook [`benchmark_tsai.ipynb`](./benchmark_tsai.ipynb) is provided for benchmarking the time-sequence deep learning models. You can try to train and test different deep learning time-sequence models with this [notebook](./benchmark_tsai.ipynb).
+
+Evaluation results on the test data of the trained tsai models are provided in [`./tsai_models/5_class__s/archs_results.csv`](./Tsai_Models/5_class__s/archs_results.csv)
 
 ## Citation
  
