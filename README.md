@@ -122,7 +122,7 @@ python ag_train.py \
     --verbose 0 \
     --evaluate_on_test_data
 ```
-
+Note: AutoGluon training with `best_quality` would not prefer to use GPU due to distributed training and better performance for xgboost models.
 
 ## Analysis on the results
 
