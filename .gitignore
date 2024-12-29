@@ -4,7 +4,6 @@ data/
 *.pth
 *.pkl
 *.json
-ag_train.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

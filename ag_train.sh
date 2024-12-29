@@ -1,6 +1,6 @@
 python ag_train.py \
     --sp_mode s \
-    --class_num 6 \
+    --class_num 5 \
     --feat tsfresh_raw \
     --ag_train_quality best_quality \
     --hours 1.0 \
@@ -24,7 +24,7 @@ python ag_train.py \
 python ag_train.py \
     --sp_mode s \
     --class_num 6 \
-    --feat tsfresh \
+    --feat tsfresh_raw \
     --ag_train_quality best_quality \
     --hours 1.0 \
     --num_cpus 10 \
@@ -35,7 +35,7 @@ python ag_train.py \
 python ag_train.py \
     --sp_mode s \
     --class_num 6 \
-    --feat raw \
+    --feat tsfresh_raw \
     --ag_train_quality best_quality \
     --hours 2.0 \
     --num_cpus 10 \
