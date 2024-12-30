@@ -1,4 +1,4 @@
-AutogluonModels/
+AutogluonModels*
 data/
 *.tar.gz
 *.pth
