@@ -61,16 +61,14 @@ This repository contains the source data and codes for paper "Mechanistic Studie
     ```
     .
     └── solve_ode_scripts
-        ├── solve_ivp_example.sh (example script to generate 15-class ODE data)
-        ├── solve_ivp_double_inside.py
-        ├── solve_ivp_double_outside.py
+        ├── solve_ivp_example.sh (example script to generate 7-detailed-class ODE data)
         ├── solve_ivp_double.py
         ├── solve_ivp_single.py
         └── solve_ivp_single_outside.py
     ```
 
 2. use notebook [`./prepare_data.ipynb`](./prepare_data.ipynb) to prepare the tabular data for training. The following steps are included:
-    - Read the json raw data, transform 15 detailed classes into 5 or 6 general classes, and collect them in `./data/x_class/raw/xxx__all.csv` files
+    - Read the json raw data, transform 7 detailed classes into 5 or 6 general classes, and collect them in `./data/x_class/raw/xxx__all.csv` files
     - Stratifiedly and randomly choose 10k data for each general class as `./data/x_class/raw/xxx__10k.csv` files
     - Stratifiedly and randomly split 10% data as test data `./data/x_class/test.csv` and the rest as train and validation data `./data/x_class/train_val.csv`
     - Extract the tsfresh features as `./data/x_class/train_val_tsfresh_feat.csv` and `./data/x_class/test_tsfresh_feat.csv` files
