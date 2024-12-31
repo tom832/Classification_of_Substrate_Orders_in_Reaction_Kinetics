@@ -75,7 +75,7 @@ This repository contains the source data and codes for paper "Mechanistic Studie
 
 
 ## Training and Evaluation on Test data
-- `python ag_train.py`, parameters are as follows:
+- `python ag_train.py`, parameters are as follows, or you can use `ag_train.sh` to train the models with different parameters.
 ```
 >> python ag_train.py -h
 
@@ -120,7 +120,7 @@ python ag_train.py \
     --verbose 0 \
     --evaluate_on_test_data
 ```
-Note: AutoGluon training with `best_quality` would not prefer to use GPU due to distributed training and better performance for xgboost models.
+Note: AutoGluon training with `best_quality` would not prefer to use GPU due to distributed training and better performance for LightGBM models.
 
 ## Analysis on the results
 
