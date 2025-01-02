@@ -90,7 +90,7 @@ if __name__ == '__main__':
                     A = log_uniform(A_down_bound, A_up_bound)
 
             elif task_name == '0':
-                B = log_uniform(0.28, 0.79)
+                B = log_uniform(0.28, 0.79) # it's a reasonable range for B to make the task solvable
                 while (a+B)/0.005 > 10**5:
                     a = random.uniform(1, 10)*10**random.choice([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4])
                     B = log_uniform(0.28, 0.79)

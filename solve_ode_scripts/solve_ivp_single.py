@@ -21,6 +21,14 @@ def solve_task(A, a, B):
         return t, z, A, a, B
     else:
         return None
+    
+def log_uniform(lower_bound, upper_bound):
+    log_lower_bound = np.log(lower_bound)
+    log_upper_bound = np.log(upper_bound)
+    
+    log_random = random.uniform(log_lower_bound, log_upper_bound)
+    
+    return np.exp(log_random)
         
 
 if __name__ == '__main__':
@@ -54,7 +62,7 @@ if __name__ == '__main__':
             B = random.uniform(1, 10)*10**random.choice([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4])
 
             if task_name == '1':
-                A = random.uniform(10**(-5), (a+B)/10)
+                A = log_uniform(10**(-5), (a+B)/10)
                 
             elif task_name == 'mm':
                 down_bound = (a+B)/10
@@ -63,14 +71,14 @@ if __name__ == '__main__':
                     down_bound = 10**(-5)
                 if up_bound > 10**5:
                     up_bound = 10**5
-                A = random.uniform(down_bound, up_bound)
+                A = log_uniform(down_bound, up_bound)
 
             elif task_name == '0':
-                B = random.uniform(0.28, 0.79)
+                B = log_uniform(0.28, 0.79) # it's a reasonable range for B to make the task solvable
                 while (a+B)/0.005 > 10**5:
-                    a = random.uniform(1, 10)*10**random.choice([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4])
-                    B = random.uniform(0.28, 0.79)
-                A = random.uniform((a+B)/0.005, 10**5)
+                    a = log_uniform(1, 10)*10**random.choice([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4])
+                    B = log_uniform(0.28, 0.79)
+                A = log_uniform((a+B)/0.005, 10**5)
                 
             else:
                 raise ValueError('task_name must be 0, 1 or mm')

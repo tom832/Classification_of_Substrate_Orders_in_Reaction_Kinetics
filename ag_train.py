@@ -116,7 +116,7 @@ if __name__ == '__main__':
         train_data=train_val_merge_data,
         presets=ag_train_quality,
         time_limit=60*60*hours,
-        num_gpus=args.num_gpus,
+        ag_args_fit={"num_gpus": args.num_gpus},
         num_cpus=args.num_cpus if args.num_cpus > 0 else 'auto',
     )
 

@@ -1,6 +1,9 @@
-AutogluonModels/
+AutogluonModels*
 data/
 *.tar.gz
+*.pth
+*.pkl
+*.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
