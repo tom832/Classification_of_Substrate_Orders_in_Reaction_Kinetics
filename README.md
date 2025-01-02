@@ -49,9 +49,9 @@ This repository contains the source data and codes for paper "Mechanistic Studie
     │   └── ode_raw_data (directory for raw data of ODE)
     └── AutogluonModels
         ├── 5_class
-        │   └── tsfresh_raw_feat__s__best_quality_3h (best model used in research)
+        │   └── tsfresh_raw_feat__s__best_quality_3.0h (best model used in research)
         └── 6_class
-            └── tsfresh_raw_feat__s__best_quality_3h (best model used in research)
+            └── tsfresh_raw_feat__s__best_quality_3.0h (best model used in research)
 
     ```
 
@@ -132,7 +132,9 @@ Including the following for 5-class and 6-class separately:
 3. Confuxion matrix heatmap of prediction on test data
 4. Chord diagram of prediction on test data
 5. Probability distribution of prediction on test data (Figure 4e in the paper)
-6. Benchmark for the data size 
+6. Benchmark for the data size (Figure S3)
+7. Benchmark for the feature type (Table S3)
+8. Benchmark for the training time
 
 ## Inference on experimental data
 
