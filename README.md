@@ -27,7 +27,7 @@ This repository contains the source data and codes for paper "Machine-Learning A
     - `cd Classification_of_Substrate_Orders_in_Reaction_Kinetics`
 
 2. Create conda environment from environment.yml (Recommended operating on a Linux machine)
-    - `conda create -f environment.yml` (AutoGluon version: 1.1.1)
+    - `conda env create -f environment.yml` (AutoGluon version: 1.1.1)
     - `conda activate cosork` stands for **C**lassification **O**f **S**ubstrate **O**rders in **R**eaction **K**inetics
 
 3. Download and unzip the data and model
