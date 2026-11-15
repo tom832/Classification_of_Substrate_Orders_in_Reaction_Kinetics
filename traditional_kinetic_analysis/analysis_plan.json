@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-20",
+  "status": "Exploratory common-procedure kinetic comparison; processing sensitivity is reported.",
+  "source_sha256": "b8a4d12e08ee7958b6257b91a639d289255a5f82c385e856363c99b40146bd52",
+  "substrates": [
+    "1a",
+    "1b",
+    "1d",
+    "1e",
+    "1f",
+    "1g",
+    "1h"
+  ],
+  "primary": {
+    "baseline": "tail10",
+    "name": "sg21_stride7",
+    "window": 21,
+    "degree": 2,
+    "stride": 7,
+    "floor": 0.05
+  },
+  "sensitivity": [
+    {
+      "baseline": "tail05",
+      "name": "sg21_stride7",
+      "window": 21,
+      "degree": 2,
+      "stride": 7,
+      "floor": 0.05
+    },
+    {
+      "baseline": "tail15",
+      "name": "sg21_stride7",
+      "window": 21,
+      "degree": 2,
+      "stride": 7,
+      "floor": 0.05
+    },
+    {
+      "baseline": "zero",
+      "name": "sg21_stride7",
+      "window": 21,
+      "degree": 2,
+      "stride": 7,
+      "floor": 0.05
+    },
+    {
+      "baseline": "tail10",
+      "name": "sg17_stride7",
+      "window": 17,
+      "degree": 2,
+      "stride": 7,
+      "floor": 0.05
+    },
+    {
+      "baseline": "tail10",
+      "name": "sg25_stride7",
+      "window": 25,
+      "degree": 2,
+      "stride": 7,
+      "floor": 0.05
+    }
+  ],
+  "bootstrap": {
+    "primary": 300,
+    "sensitivity": 100,
+    "seed": 20261020,
+    "trend": "SG11 degree2",
+    "multiplier_block": "ceil(N^(1/3)); random offset; signs +/-1; deterministic substrate-index seed"
+  },
+  "fitting": "Same original rate scale and full propagated overlap covariance for all candidates; K in [1e-4,1e4]; nonnegative amplitudes; S2 explicitly embedded in S5 at k_side=0; centered GLS R2 and working-Gaussian AICc.",
+  "secondary": "Fit integrated S2/S3/S5 directly to the identical original-point range used by the primary SG extraction, at its fixed tail10 background; include iid and stationary AR1 errors and report complete residual/optimizer diagnostics.",
+  "interpretation_rules": [
+    "Retain all fitted results, negative rate estimates and parameter-boundary diagnostics.",
+    "Report background and differentiation-window sensitivity alongside the primary comparison.",
+    "Interpret AICc differences conditional on the stated preprocessing and covariance model.",
+    "Include the small-K/background-offset diagnostic and the pure-first-order control."
+  ]
+}
